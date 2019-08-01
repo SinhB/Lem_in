@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   edmond_karp.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mjouffro <mjouffro@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yabecret <yabecret@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/25 16:27:12 by yabecret          #+#    #+#             */
-/*   Updated: 2019/07/05 18:11:09 by mjouffro         ###   ########.fr       */
+/*   Updated: 2019/08/01 12:25:04 by yabecret         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,8 @@ int			backtrack(t_lemin *lemin)
 	{
 		if (tracker == 0)
 		{
+			ft_printf("{yellow} pre-final solution : {reset}\n");
+			print(lemin->container->path);
 			lemin->container->len = cnt;
 			return (SUCCESS);
 		}
@@ -143,4 +145,3 @@ int			compare_weights(t_node **room, int idx)
 			else
 				room->links[i]->weight = room->weight + 1;
 */
-

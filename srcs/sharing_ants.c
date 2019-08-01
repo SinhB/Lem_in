@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sharing_ants.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mjouffro <mjouffro@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yabecret <yabecret@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/27 11:43:03 by yabecret          #+#    #+#             */
-/*   Updated: 2019/07/05 19:38:42 by mjouffro         ###   ########.fr       */
+/*   Updated: 2019/08/01 12:16:09 by yabecret         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ unsigned int	get_total_len(t_lemin *lemin)
 	unsigned int	ret;
 
 	ret = 0;
-	tmp = lemin->container;
+	tmp = lemin->container1;
 	while (tmp->next)
 	{
 		//ft_printf ("tmp->len is : %u\n", tmp->len);
@@ -57,7 +57,7 @@ int				sharing_ants(t_lemin *lemin)
 	//lemin->max_steps = (lemin->nb_ants + total_len - 1) / lemin->nb_paths;
 	//lemin->max_steps = 75;
 	//ft_printf ("{green}max_steps is : %u\n{reset}", lemin->max_steps);
-	allpaths = lemin->container;
+	allpaths = lemin->container1;
 	while (allpaths->next)
 	{
 		//allpaths->nb_ants = fill_path(lemin, allpaths, total_len);
@@ -72,7 +72,7 @@ int				sharing_ants(t_lemin *lemin)
 		ft_printf ("sous_total is : %u\n", sous_total);
 		allpaths = allpaths->next;
 	}
-	allpaths = lemin->container;
+	allpaths = lemin->container1;
 	while (lemin->nb_ants > sous_total)
 	{
 		while (allpaths->next)

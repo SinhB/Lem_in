@@ -68,6 +68,7 @@ typedef	struct			s_lemin
 	t_graph				*head;
 	t_graph				*sink;
 	t_allpaths			*container;
+	t_allpaths			*container1;
 }						t_lemin;
 
 
