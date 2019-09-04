@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   edmond_karp.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yabecret <yabecret@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mjouffro <mjouffro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/25 16:27:12 by yabecret          #+#    #+#             */
-/*   Updated: 2019/08/01 12:25:04 by yabecret         ###   ########.fr       */
+/*   Updated: 2019/09/04 13:03:34 by mjouffro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,11 +71,17 @@ void		resetvisited(t_lemin *lemin)
 
 int			ek(t_lemin *lemin)
 {
+	int 	tmp;
+
+	tmp = 1;
 	lemin->matrix = memalloc_matrix(lemin->cnt);
 	lemin->weight_matrix = memalloc_matrix(lemin->cnt);
-	while (bfs(lemin) != 0)
+	lemin->max_steps = 1000;
+	while (bfs(lemin) != 0 || tmp)
 	{
 		backtrack(lemin);
+		tmp = nbr_steps(lemin);
+		ft_printf("nbr_steps is %d\n", tmp);
 		resetvisited(lemin);
 		if (!updatematrix(lemin))
 			break ;

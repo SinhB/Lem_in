@@ -47,6 +47,7 @@ typedef	struct 			s_allpaths
 	struct s_allpaths	*next;
 	unsigned int		len;
 	unsigned int		nb_ants;
+	unsigned int		max_steps;
 }						t_allpaths;
 
 typedef	struct			s_lemin
@@ -157,10 +158,12 @@ int			rooms_errors(t_lemin *lemin);
 **                     BFS
 */
 
-t_links		*find_hash_node(t_links *list, unsigned long hash);
-void		resetvisited(t_lemin *lemin);
-int			backtrack(t_lemin *lemin);
-int			bfs(t_lemin *lemin);
+t_links			*find_hash_node(t_links *list, unsigned long hash);
+void			resetvisited(t_lemin *lemin);
+int				backtrack(t_lemin *lemin);
+int				bfs(t_lemin *lemin);
+unsigned int	nbr_steps(t_lemin *lemin);
+unsigned int	get_total(t_lemin *lemin);
 
 /*
 **                     queue
