@@ -6,7 +6,7 @@
 /*   By: mjouffro <mjouffro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/26 17:10:06 by mjouffro          #+#    #+#             */
-/*   Updated: 2019/08/01 12:48:26 by yabecret         ###   ########.fr       */
+/*   Updated: 2019/09/04 17:13:29 by yabecret         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,12 @@ int				main(void)
 	ft_bzero(&lemin, sizeof(lemin));
 	if (!(parsing(&lemin)))
 		return (FAILURE);
-	//ft_printf("parsing done\n");
+	ft_printf("parsing done\n");
 	ek(&lemin);
 	updatefinalmatrices(&lemin);
 	//printmatrix(lemin.weight_matrix, lemin.cnt);
 //	freeallpaths(&lemin.container);
-///	get_final_paths(&lemin);
+	get_final_paths(&lemin);
 	//printmatrix(lemin.matrix, lemin.cnt);
 ///	ft_printf("%s\n", lemin.map);
 ///	sharing_ants(&lemin);

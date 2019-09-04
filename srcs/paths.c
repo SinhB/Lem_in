@@ -6,7 +6,7 @@
 /*   By: mjouffro <mjouffro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/26 16:26:52 by mjouffro          #+#    #+#             */
-/*   Updated: 2019/08/01 12:23:33 by yabecret         ###   ########.fr       */
+/*   Updated: 2019/09/04 17:16:49 by yabecret         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,7 @@ void		get_final_paths(t_lemin *lemin)
 	t_allpaths	*head;
 	int 		length;
 	int			i;
+	int			nb_steps;
 
 	lemin->nb_paths = find_nb_paths(lemin);
 	tmp = memalloc_links();
@@ -97,10 +98,15 @@ void		get_final_paths(t_lemin *lemin)
 		print(lemin->container1->path);
 		//ft_printf("path len is : %d\n", lemin->container->len);
 //		printmatrix(lemin->matrix, lemin->cnt);
-		tmp2 = memalloc_allpaths();
-		lemin->container1->next = tmp2;
-		lemin->container1 = tmp2;
+		if (i != lemin->nb_paths - 1)
+		{
+			tmp2 = memalloc_allpaths();
+			lemin->container1->next = tmp2;
+			lemin->container1 = tmp2;
+		}
 		i++;
 	}
 	lemin->container1 = head;
+	nb_steps = nbr_steps(lemin, head);
+	ft_printf("FINAL nbr_steps is %d\n", nb_steps);
 }

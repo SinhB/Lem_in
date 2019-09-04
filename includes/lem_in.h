@@ -68,6 +68,7 @@ typedef	struct			s_lemin
 	t_links				*list;
 	t_graph				*head;
 	t_graph				*sink;
+	t_allpaths			*debut;
 	t_allpaths			*container;
 	t_allpaths			*container1;
 }						t_lemin;
@@ -162,8 +163,9 @@ t_links			*find_hash_node(t_links *list, unsigned long hash);
 void			resetvisited(t_lemin *lemin);
 int				backtrack(t_lemin *lemin);
 int				bfs(t_lemin *lemin);
-unsigned int	nbr_steps(t_lemin *lemin);
-unsigned int	get_total(t_lemin *lemin);
+int				len_max(t_lemin *lemin, t_allpaths *head);
+unsigned int	nbr_steps(t_lemin *lemin, t_allpaths *head);
+unsigned int	get_total(t_lemin *lemin, t_allpaths *head);
 
 /*
 **                     queue

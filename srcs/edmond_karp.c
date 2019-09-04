@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   edmond_karp.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mjouffro <mjouffro@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yabecret <yabecret@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/25 16:27:12 by yabecret          #+#    #+#             */
-/*   Updated: 2019/09/04 13:03:34 by mjouffro         ###   ########.fr       */
+/*   Updated: 2019/09/04 16:46:25 by yabecret         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ int			backtrack(t_lemin *lemin)
 		{
 			ft_printf("{yellow} pre-final solution : {reset}\n");
 			print(lemin->container->path);
-			lemin->container->len = cnt;
+			lemin->container->len = cnt - 1;
 			return (SUCCESS);
 		}
 		tmp = find_hash_node(lemin->list, tracker);
@@ -71,17 +71,20 @@ void		resetvisited(t_lemin *lemin)
 
 int			ek(t_lemin *lemin)
 {
-	int 	tmp;
+	int 		tmp;
 
 	tmp = 1;
 	lemin->matrix = memalloc_matrix(lemin->cnt);
 	lemin->weight_matrix = memalloc_matrix(lemin->cnt);
-	lemin->max_steps = 1000;
-	while (bfs(lemin) != 0 || tmp)
+	lemin->container = memalloc_allpaths();
+	lemin->debut = lemin->container;
+	lemin->max_steps = INT_MAX;
+	while (bfs(lemin) != 0 && tmp)
 	{
 		backtrack(lemin);
-		tmp = nbr_steps(lemin);
-		ft_printf("nbr_steps is %d\n", tmp);
+		tmp = nbr_steps(lemin, lemin->debut);
+		tmp ? lemin->max_steps = tmp : lemin->max_steps;
+		ft_printf("nbr_steps is %d\n", lemin->max_steps);
 		resetvisited(lemin);
 		if (!updatematrix(lemin))
 			break ;
