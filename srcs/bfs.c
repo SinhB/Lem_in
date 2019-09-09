@@ -6,7 +6,7 @@
 /*   By: yabecret <yabecret@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/10 19:21:52 by yabecret          #+#    #+#             */
-/*   Updated: 2019/09/04 17:21:07 by yabecret         ###   ########.fr       */
+/*   Updated: 2019/09/09 16:31:12 by yabecret         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ unsigned int			nbr_steps(t_lemin *lemin, t_allpaths *head)
 			reste--;
 	}
 	max_steps = max;
-	ft_printf("max_steps is : %d\n", max_steps);
+	ft_printf("{green}max_steps is : %d{reset}\n", max_steps);
 	if (max_steps > lemin->max_steps)
 		return (0);
 	else
