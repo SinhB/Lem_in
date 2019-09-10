@@ -52,7 +52,10 @@ int		get_room(t_lemin *lemin, t_links **tmp, char *line)
 	name = get_name(linetmp);
 	hash = hashing((unsigned char*)name);
 	if (is_hash_existing(*tmp, hash))
-			return (FAILURE);
+	{
+		ft_printf("has does not exist\n");
+		return (FAILURE);
+	}
 	links = memalloc_links();
 	links->room = memalloc_graph();
 	links->room->name = name;

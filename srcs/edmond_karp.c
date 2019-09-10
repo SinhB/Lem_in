@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   edmond_karp.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yabecret <yabecret@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mjouffro <mjouffro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/25 16:27:12 by yabecret          #+#    #+#             */
-/*   Updated: 2019/09/04 16:46:25 by yabecret         ###   ########.fr       */
+/*   Updated: 2019/09/10 17:27:22 by mjouffro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ int			backtrack(t_lemin *lemin)
 	unsigned int	cnt;
 
 	tracker = lemin->hashend;
+	//tracker = lemin->hashstart;
 	cnt = 0;
 	while (1)
 	{

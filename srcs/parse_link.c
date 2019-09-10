@@ -6,7 +6,7 @@
 /*   By: mjouffro <mjouffro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/05 12:28:54 by yabecret          #+#    #+#             */
-/*   Updated: 2019/07/05 15:25:21 by mjouffro         ###   ########.fr       */
+/*   Updated: 2019/09/10 15:38:29 by mjouffro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,6 @@ int get_link(t_lemin *lemin, t_links **tmp, char *line)
 	{	//return (FAILURE);
 			ft_printf("1 :%s\n", rooms[0]);
 			ft_printf("2 :%s\n", rooms[1]);
-			ft_printf("not working\n");
 	}
 	l1 = memalloc_links();
 	l2 = memalloc_links();

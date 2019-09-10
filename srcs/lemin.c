@@ -6,7 +6,7 @@
 /*   By: mjouffro <mjouffro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/26 17:10:06 by mjouffro          #+#    #+#             */
-/*   Updated: 2019/09/04 17:13:29 by yabecret         ###   ########.fr       */
+/*   Updated: 2019/09/09 20:31:32 by mjouffro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,10 @@ int				main(void)
 
 	ft_bzero(&lemin, sizeof(lemin));
 	if (!(parsing(&lemin)))
+	{
+		ft_printf("parsing error\n");
 		return (FAILURE);
+	}
 	ft_printf("parsing done\n");
 	ek(&lemin);
 	updatefinalmatrices(&lemin);

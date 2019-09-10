@@ -26,6 +26,7 @@ int		parsing(t_lemin *lemin)
 		{
 			lemin->state |= start_end(line);
 			add_line_to_str(lemin, line);
+			ft_strdel(&line);
 		}
 		else if (is_comment(line))
 		{
@@ -33,22 +34,39 @@ int		parsing(t_lemin *lemin)
 			ft_strdel(&line);
 		}
 		else if (ft_str_is_digit(line) && !lemin->nb_ants)
+		{
 			lemin->nb_ants = ft_atoi(line);
+			ft_printf("nb ants is %d\n", lemin->nb_ants);
+		}
 		else if (ft_strchr(line, '-') && (lemin->state & S_ROOMS))
 		{
 			if (rooms_errors(lemin) && !(lemin->state & S_LINKS))
+			{
+				ft_printf("rooms error\n");
 				return (gnl_exit(line));
+			}
 			if (!get_link(lemin, &lemin->list, line))
+			{
+				ft_printf("linkss error\n");
 				return (gnl_exit(line));
+			}
+			//ft_printf("got links \n");
 		}
 		else if (!(lemin->state & S_LINKS) && is_room(line) 
 			&& (lemin->nb_ants))
 		{
 			if (!get_room(lemin, &lemin->list, line))
+			{
+				ft_printf("did not get room\n");
 				return (gnl_exit(line));
+			}
+			//ft_printf("got rooms\n");
 		}
-		else
+		/*else
+		{
+			ft_printf("did not go in any parsing condition\n");
 			return (gnl_exit(line));
+		}*/
 		ft_strdel(&line);
 	}
 	return (1);

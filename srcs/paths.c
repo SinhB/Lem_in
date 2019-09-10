@@ -6,7 +6,7 @@
 /*   By: mjouffro <mjouffro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/26 16:26:52 by mjouffro          #+#    #+#             */
-/*   Updated: 2019/09/09 16:31:59 by yabecret         ###   ########.fr       */
+/*   Updated: 2019/09/10 16:35:34 by mjouffro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -243,9 +243,9 @@ void		get_final_paths(t_lemin *lemin)
 		if (length == lemin->cnt)
 			ft_printf("length == lemin->cnt!\n");
 		lemin->container1->len = length;
-		ft_printf("{yellow} final solution : {reset}\n");
-		print(lemin->container1->path);
-		ft_printf("path len is : %d\n", lemin->container1->len);
+		//ft_printf("{yellow} final solution : {reset}\n");
+		//print(lemin->container1->path);
+		//ft_printf("path len is : %d\n", lemin->container1->len);
 //		printmatrix(lemin->matrix, lemin->cnt);
 		if (i != lemin->nb_paths - 1)
 		{
@@ -256,18 +256,29 @@ void		get_final_paths(t_lemin *lemin)
 		i++;
 	}
 	lemin->container1 = head;
-	ft_printf("{red} AFTER SORT : {reset}\n");
-	lemin->container1 = sort_paths(lemin->container1);
+	while (lemin->container1)
+	{
+		//ft_printf("{yellow} final solution : {reset}\n");
+		ft_printf("the paths is : \n\n\n");
+		print(lemin->container1->path);
+		printall(lemin->container1->path);
+		//ft_printf("path len is : %d\n", lemin->container1->len);
+		lemin->container1 = lemin->container1->next;
+	}
+	//ft_printf("{red} AFTER SORT : {reset}\n");
+	/*lemin->container1 = sort_paths(lemin->container1);
 	head = lemin->container1;
 	while (lemin->container1)
 	{
-		ft_printf("{yellow} final solution : {reset}\n");
+		//ft_printf("{yellow} final solution : {reset}\n");
+		ft_printf("the paths is : \n\n\n");
 		print(lemin->container1->path);
-		ft_printf("path len is : %d\n", lemin->container1->len);
+		printall(lemin->container1->path);
+		//ft_printf("path len is : %d\n", lemin->container1->len);
 		lemin->container1 = lemin->container1->next;
 	}
 	lemin->container1 = head;
 	max_steps2(lemin, head);
 	//	nb_steps = nbr_steps(lemin, head);
-	//	ft_printf("FINAL nbr_steps is %d\n", nb_steps);
+	//	ft_printf("FINAL nbr_steps is %d\n", nb_steps);*/
 }

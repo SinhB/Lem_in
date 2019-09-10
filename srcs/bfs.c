@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   bfs.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yabecret <yabecret@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mjouffro <mjouffro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/10 19:21:52 by yabecret          #+#    #+#             */
-/*   Updated: 2019/09/09 16:31:12 by yabecret         ###   ########.fr       */
+/*   Updated: 2019/09/10 16:56:24 by mjouffro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,9 +76,9 @@ unsigned int			nbr_steps(t_lemin *lemin, t_allpaths *head)
 	ft_printf("reste = %d\n", reste);
 	while (tmp)
 	{
-		ft_printf("AVANT tmp->max_steps is : %d\n", tmp->max_steps);
+		//ft_printf("AVANT tmp->max_steps is : %d\n", tmp->max_steps);
 		tmp->max_steps += (remainder + tmp->len + (reste ? 1 : 0) - 1);
-		ft_printf("APRES tmp->max_steps is : %d\n", tmp->max_steps);
+		//ft_printf("APRES tmp->max_steps is : %d\n", tmp->max_steps);
 		if (max < tmp->max_steps)
 			max = tmp->max_steps;
 		tmp = tmp->next;
@@ -105,6 +105,7 @@ int			bfs(t_lemin *lemin)
 	todelete = NULL;
 	new = memalloc_links();
 	new->room = lemin->head;
+	//new->room = lemin->sink;
 	enqueue(&queue, new);
 	queue->room->visited = true;
 	while (queue != NULL)
@@ -116,6 +117,7 @@ int			bfs(t_lemin *lemin)
 		enqueue_adjacent(lemin, &queue, queue->room); //add all adjacent into the queue
 		todelete = queue;
 		queue = queue->next;
+		print(queue);
 		if (queue)
 			cnt++;
 		free(todelete); //remove first node from the queue
