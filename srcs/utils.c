@@ -6,7 +6,7 @@
 /*   By: mjouffro <mjouffro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/26 15:45:00 by mjouffro          #+#    #+#             */
-/*   Updated: 2019/09/05 11:21:32 by yabecret         ###   ########.fr       */
+/*   Updated: 2019/09/11 16:01:35 by mjouffro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ void print(t_links *head)
 		return ;
 	while (head)
 	{
-		//ft_printf("{green}room is :%s\n{reset}", head->room->name);
+		ft_printf("{green}room is :%s\n{reset}", head->room->name);
 		head = head->next;
 	}
 }

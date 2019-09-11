@@ -6,7 +6,7 @@
 /*   By: mjouffro <mjouffro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/04 12:08:13 by mjouffro          #+#    #+#             */
-/*   Updated: 2019/09/11 10:48:45 by yabecret         ###   ########.fr       */
+/*   Updated: 2019/09/11 17:14:48 by mjouffro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,13 +28,21 @@ int		solve_lemin(t_lemin *lemin, unsigned int move)
 	t_allpaths *path;
 
 	path = final_solution(lemin);
-//	path = lemin->container1;
+	move = 1;
 	lemin->ant_state = 1;
+	while (path)
+	{
+		path->nb_ants += lemin->remainder;
+		ft_printf("{green}remaindr is :%u\n{reset}", lemin->remainder);
+		ft_printf("{green}path len is :%u\n{reset}", path->len);
+		ft_printf("{green}path nb ants is :%u\n{reset}", path->nb_ants);
+		path = path->next;
+	}
 	//ft_printf("\n");
 //	while (move < lemin->max_steps)
 //		move += solve(lemin, path);
-	while (move)
-		move = solve(lemin, path);
+	//while (move)
+	//	move = solve(lemin, path);
 	return (1);
 }
 

@@ -6,7 +6,7 @@
 /*   By: mjouffro <mjouffro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/26 17:10:06 by mjouffro          #+#    #+#             */
-/*   Updated: 2019/09/11 10:49:14 by yabecret         ###   ########.fr       */
+/*   Updated: 2019/09/11 16:25:10 by mjouffro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,7 @@ int				main(void)
 	get_final_paths(&lemin);
 	//printmatrix(lemin.matrix, lemin.cnt);
 ///	ft_printf("%s\n", lemin.map);
-///	sharing_ants(&lemin);
-//	solve_lemin(&lemin, 1);
+	solve_lemin(&lemin, 1);
 //	freelemin(&lemin);
 	return (0);
 }

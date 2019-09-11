@@ -47,6 +47,7 @@ typedef	struct 			s_allpaths
 	struct s_allpaths	*next;
 	unsigned int		len;
 	unsigned int		nb_ants;
+	unsigned int		total;
 	unsigned int		max_steps;
 }						t_allpaths;
 
@@ -56,6 +57,7 @@ typedef	struct			s_lemin
 	unsigned int		ant_state;
 	unsigned int		max_steps;
 	unsigned int		max_steps1;
+	unsigned int		remainder;
 	int					state;
 	char                *start;
 	char				*end;
@@ -218,5 +220,8 @@ int		solve_lemin(t_lemin *lemin, unsigned int move);
 int		solve(t_lemin *lemin, t_allpaths *path);
 void	move_ants(t_lemin *lemin, t_allpaths *paths);
 void	fill_ants(t_lemin *lemin, t_allpaths *paths);
+
+
+unsigned int			get_total2(t_lemin *lemin, t_allpaths *head, int index);
 
 #endif

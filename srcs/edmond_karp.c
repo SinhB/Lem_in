@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   edmond_karp.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yabecret <yabecret@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mjouffro <mjouffro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/25 16:27:12 by yabecret          #+#    #+#             */
-/*   Updated: 2019/09/11 10:48:26 by yabecret         ###   ########.fr       */
+/*   Updated: 2019/09/11 16:35:30 by mjouffro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,8 @@ int			backtrack(t_lemin *lemin)
 	{
 		if (tracker == 0)
 		{
-			ft_printf("{yellow} pre-final solution : {reset}\n");
-			print(lemin->container->path);
+			//ft_printf("{yellow} pre-final solution : {reset}\n");
+			//print(lemin->container->path);
 			lemin->container->len = cnt - 1;
 			return (SUCCESS);
 		}
@@ -85,74 +85,11 @@ int			ek(t_lemin *lemin)
 		backtrack(lemin);
 		tmp = nbr_steps(lemin, lemin->debut);
 		tmp ? lemin->max_steps = tmp : lemin->max_steps;
-		ft_printf("nbr_steps is %d\n", lemin->max_steps);
+		//ft_printf("nbr_steps is %d\n", lemin->max_steps);
 		resetvisited(lemin);
 		if (!updatematrix(lemin))
 			break ;
-		//printmatrix(lemin->matrix, lemin->cnt);
-		//if (!(updateweightmatrix(lemin)))
-		//	ft_printf("did not work\n");
 	}
-	//printmatrix(lemin->weight_matrix, lemin->cnt);
 	lemin->container = lemin->debut;
 	return (SUCCESS);
 }
-
-
-
-
-
-
-
-
-
-
-
-
-/*
-int			compare_weights(t_node **room, int idx)
-{
-	t_node	*nxt_room;
-
-	nxt_room = (*room)->links[idx];
-	if (nxt_room->weight == 0)
-		return (1);
-	else if (((*room)->weight + 1 < nxt_room->weight)
-			&& nxt_room->vzt == VISITED
-			&& ft_strcmp((*room)->hist->next->room->name, nxt_room->name))
-	{
-		if (check_redundancy(*room, nxt_room))
-			return (0);
-		if (nxt_room->hist != NULL)
-		{
-			remove_path(nxt_room->hist);
-			nxt_room->hist = NULL;
-		}
-		nxt_room->weight = (*room)->weight + 1;
-		nxt_room->hist = copy_path((*room)->hist);
-		add_path(nxt_room, nxt_room->hist);
-		return (1);
-	}
-	return (0);
-}
-
-		while (nxt_room->links[++i])
-		{
-			if ((*room)->access == CLSD && nxt_room->hist)
-				compare_weights(&nxt_room, i);
-			if (reverse_flux_case(nxt_room, i) && nxt_room->links[i]->vzt == 0)
-			{
-				fill_vzt_path(room, nxt_room, vzt_nxt, i);
-				//room = build_path(*room, idx);
-				closed_access_case2(nxt_room, vzt_nxt, reinit, i);
-				if ((*room)->access == OPEN)
-					nxt_room->weight = (*room)->weight + 1;
-				break ;
-			}
-		}
-
-			if (reverse_flux_case(room, i))
-				room->links[i]->weight = room->weight - 1;
-			else
-				room->links[i]->weight = room->weight + 1;
-*/
