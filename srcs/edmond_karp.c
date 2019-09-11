@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   edmond_karp.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mjouffro <mjouffro@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yabecret <yabecret@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/25 16:27:12 by yabecret          #+#    #+#             */
-/*   Updated: 2019/09/10 17:27:22 by mjouffro         ###   ########.fr       */
+/*   Updated: 2019/09/11 10:48:26 by yabecret         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,6 +94,7 @@ int			ek(t_lemin *lemin)
 		//	ft_printf("did not work\n");
 	}
 	//printmatrix(lemin->weight_matrix, lemin->cnt);
+	lemin->container = lemin->debut;
 	return (SUCCESS);
 }
 

@@ -6,7 +6,7 @@
 /*   By: mjouffro <mjouffro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/26 16:26:52 by mjouffro          #+#    #+#             */
-/*   Updated: 2019/09/10 16:35:34 by mjouffro         ###   ########.fr       */
+/*   Updated: 2019/09/11 10:43:31 by yabecret         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -151,7 +151,7 @@ unsigned int			get_total2(t_lemin *lemin, t_allpaths *head, int index)
 	max_len = len_max2(lemin, tmp, index);
 	ft_printf("max_len is %d\n", max_len);
 	total = 0;
-	max_steps = lemin->max_steps;
+	max_steps = lemin->max_steps1;
 	while (i < index)
 	{
 		tmp->max_steps = ((max_len + 1) - tmp->len);
@@ -173,7 +173,7 @@ unsigned int			nbr_steps2(t_lemin *lemin, t_allpaths *head, int index)
 	int i = 0;
 	t_allpaths		*tmp;
 
-	max_steps = lemin->max_steps;
+	max_steps = lemin->max_steps1;
 	tmp = head;
 	total = get_total2(lemin, tmp, index);
 	if (total > lemin->nb_ants)
@@ -197,7 +197,7 @@ unsigned int			nbr_steps2(t_lemin *lemin, t_allpaths *head, int index)
 	}
 	max_steps = max;
 	ft_printf("{green}max_steps is : %d{reset}\n", max_steps);
-	if (max_steps > lemin->max_steps)
+	if (max_steps > lemin->max_steps1)
 		return (0);
 	else
 		return (max_steps);
@@ -206,16 +206,19 @@ unsigned int			nbr_steps2(t_lemin *lemin, t_allpaths *head, int index)
 int			max_steps2(t_lemin *lemin, t_allpaths *head)
 {
 	int			i;
+	int			tmp;
 	int			max = lemin->nb_paths;
 
 	i = 1;
 	ft_printf("max : %d\n", max);
-	lemin->max_steps = INT_MAX;
+	lemin->max_steps1 = INT_MAX;
 	while (i < (max + 1))
 	{
 		ft_printf("{red}PRINT %d{reset}\n", i);
-		if (!nbr_steps2(lemin, head, i))
+		if ((tmp = nbr_steps2(lemin, head, i)) == 0)
 			return (0);
+		else
+			lemin->max_steps1 = tmp;
 		i++;
 	}
 	return (1);
@@ -258,27 +261,30 @@ void		get_final_paths(t_lemin *lemin)
 	lemin->container1 = head;
 	while (lemin->container1)
 	{
-		//ft_printf("{yellow} final solution : {reset}\n");
-		ft_printf("the paths is : \n\n\n");
-		print(lemin->container1->path);
-		printall(lemin->container1->path);
-		//ft_printf("path len is : %d\n", lemin->container1->len);
+		ft_printf("{yellow} final solution : {reset}\n");
+	//	ft_printf("the paths is : \n\n\n");
+	//	print(lemin->container1->path);
+	//	printall(lemin->container1->path);
+		ft_printf("path len is : %d\n", lemin->container1->len);
 		lemin->container1 = lemin->container1->next;
 	}
-	//ft_printf("{red} AFTER SORT : {reset}\n");
-	/*lemin->container1 = sort_paths(lemin->container1);
+	lemin->container1 = head;
+	ft_printf("{red} AFTER SORT : {reset}\n");
+	lemin->container1 = sort_paths(lemin->container1);
 	head = lemin->container1;
 	while (lemin->container1)
 	{
-		//ft_printf("{yellow} final solution : {reset}\n");
-		ft_printf("the paths is : \n\n\n");
-		print(lemin->container1->path);
-		printall(lemin->container1->path);
-		//ft_printf("path len is : %d\n", lemin->container1->len);
+		ft_printf("{yellow} final solution : {reset}\n");
+		//ft_printf("the paths is : \n\n\n");
+		//print(lemin->container1->path);
+		//printall(lemin->container1->path);
+		ft_printf("path len is : %d\n", lemin->container1->len);
 		lemin->container1 = lemin->container1->next;
 	}
 	lemin->container1 = head;
 	max_steps2(lemin, head);
+	ft_printf("max_steps : %d\n", lemin->max_steps);
+	ft_printf("max_steps1 : %d\n", lemin->max_steps1);
 	//	nb_steps = nbr_steps(lemin, head);
-	//	ft_printf("FINAL nbr_steps is %d\n", nb_steps);*/
+	//	ft_printf("FINAL nbr_steps is %d\n", nb_steps);
 }

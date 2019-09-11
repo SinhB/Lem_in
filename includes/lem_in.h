@@ -55,6 +55,7 @@ typedef	struct			s_lemin
 	unsigned int		nb_ants;
 	unsigned int		ant_state;
 	unsigned int		max_steps;
+	unsigned int		max_steps1;
 	int					state;
 	char                *start;
 	char				*end;

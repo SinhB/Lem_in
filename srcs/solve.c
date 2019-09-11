@@ -6,17 +6,29 @@
 /*   By: mjouffro <mjouffro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/04 12:08:13 by mjouffro          #+#    #+#             */
-/*   Updated: 2019/08/01 12:18:57 by yabecret         ###   ########.fr       */
+/*   Updated: 2019/09/11 10:48:45 by yabecret         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
 
+t_allpaths *final_solution(t_lemin *lemin)
+{
+	t_allpaths *tmp = NULL;
+
+	if (lemin->max_steps <= lemin->max_steps1)
+		tmp = lemin->container;
+	else if (lemin->max_steps > lemin->max_steps1)
+		tmp = lemin->container1;
+	return (tmp);
+}
+
 int		solve_lemin(t_lemin *lemin, unsigned int move)
 {
 	t_allpaths *path;
 
-	path = lemin->container1;
+	path = final_solution(lemin);
+//	path = lemin->container1;
 	lemin->ant_state = 1;
 	//ft_printf("\n");
 //	while (move < lemin->max_steps)
