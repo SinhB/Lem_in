@@ -6,7 +6,7 @@
 /*   By: mjouffro <mjouffro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/26 16:26:52 by mjouffro          #+#    #+#             */
-/*   Updated: 2019/09/11 17:51:53 by mjouffro         ###   ########.fr       */
+/*   Updated: 2019/09/17 19:50:19 by mjouffro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,6 +125,7 @@ int			len_max2(t_lemin *lemin, t_allpaths *head, int index)
 
 	cnt = 0;
 	tmp = head;
+	ft_printf("tmp len is %d\n", tmp->len);
 	len_max = tmp->len;
 	while (i < index)
 	{
@@ -206,6 +207,7 @@ unsigned int			nbr_steps2(t_lemin *lemin, t_allpaths *head, int index)
 		if (reste > 0)
 			reste--;
 	}
+//	tmp = head;
 	max_steps = max;
 	//ft_printf("{green}max_steps is : %d{reset}\n", max_steps);
 	if (max_steps > lemin->max_steps1)
@@ -217,7 +219,7 @@ unsigned int			nbr_steps2(t_lemin *lemin, t_allpaths *head, int index)
 int			max_steps2(t_lemin *lemin, t_allpaths *head)
 {
 	int			i;
-	int			tmp;
+	int			tmp = 1;
 	int			max = lemin->nb_paths;
 
 	i = 1;

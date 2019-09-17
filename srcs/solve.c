@@ -6,7 +6,7 @@
 /*   By: mjouffro <mjouffro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/04 12:08:13 by mjouffro          #+#    #+#             */
-/*   Updated: 2019/09/11 17:14:48 by mjouffro         ###   ########.fr       */
+/*   Updated: 2019/09/17 19:43:24 by mjouffro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,21 +26,31 @@ t_allpaths *final_solution(t_lemin *lemin)
 int		solve_lemin(t_lemin *lemin, unsigned int move)
 {
 	t_allpaths *path;
+	t_allpaths *tmp;
 
 	path = final_solution(lemin);
+	tmp = path;
 	move = 1;
 	lemin->ant_state = 1;
-	while (path)
+	while (tmp)
 	{
-		path->nb_ants += lemin->remainder;
+		tmp->nb_ants += lemin->remainder;
 		ft_printf("{green}remaindr is :%u\n{reset}", lemin->remainder);
-		ft_printf("{green}path len is :%u\n{reset}", path->len);
-		ft_printf("{green}path nb ants is :%u\n{reset}", path->nb_ants);
-		path = path->next;
+		ft_printf("{green}tmp len is :%u\n{reset}", tmp->len);
+		ft_printf("{green}tmp nb ants is :%u\n{reset}", tmp->nb_ants);
+		tmp = tmp->next;
 	}
+	tmp = path;
+	
+	/*while (tmp)
+	{
+		ft_printf("{red}------------\n");
+		print(tmp->path);
+		tmp = tmp->next;
+	}*/
 	//ft_printf("\n");
-//	while (move < lemin->max_steps)
-//		move += solve(lemin, path);
+	while (move < lemin->max_steps)
+		move += solve(lemin, path);
 	//while (move)
 	//	move = solve(lemin, path);
 	return (1);
