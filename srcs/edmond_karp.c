@@ -6,7 +6,7 @@
 /*   By: mjouffro <mjouffro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/25 16:27:12 by yabecret          #+#    #+#             */
-/*   Updated: 2019/09/11 16:35:30 by mjouffro         ###   ########.fr       */
+/*   Updated: 2019/09/23 18:38:22 by mjouffro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,7 @@ void		resetvisited(t_lemin *lemin)
 int			ek(t_lemin *lemin)
 {
 	int 		tmp;
+	int 		final;
 
 	tmp = 1;
 	lemin->matrix = memalloc_matrix(lemin->cnt);
@@ -80,16 +81,21 @@ int			ek(t_lemin *lemin)
 	lemin->container = memalloc_allpaths();
 	lemin->debut = lemin->container;
 	lemin->max_steps = INT_MAX;
+	final = 1;
 	while (bfs(lemin) != 0 && tmp)
 	{
 		backtrack(lemin);
-		tmp = nbr_steps(lemin, lemin->debut);
+		tmp = nbr_steps(lemin, lemin->debut, final);
 		tmp ? lemin->max_steps = tmp : lemin->max_steps;
-		//ft_printf("nbr_steps is %d\n", lemin->max_steps);
 		resetvisited(lemin);
 		if (!updatematrix(lemin))
 			break ;
+	//	ft_printf("------------------\n");
+	//	ft_printf("{green} i is %d\n", final);
+	//	ft_printf("------------------\n");
+		final++;
 	}
 	lemin->container = lemin->debut;
+	sort_paths(lemin->container);
 	return (SUCCESS);
 }

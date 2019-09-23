@@ -58,6 +58,7 @@ typedef	struct			s_lemin
 	unsigned int		max_steps;
 	unsigned int		max_steps1;
 	unsigned int		remainder;
+	unsigned int		path_max_len;
 	int					state;
 	char                *start;
 	char				*end;
@@ -167,8 +168,8 @@ void			resetvisited(t_lemin *lemin);
 int				backtrack(t_lemin *lemin);
 int				bfs(t_lemin *lemin);
 int				len_max(t_lemin *lemin, t_allpaths *head);
-unsigned int	nbr_steps(t_lemin *lemin, t_allpaths *head);
-unsigned int	get_total(t_lemin *lemin, t_allpaths *head);
+unsigned int	nbr_steps(t_lemin *lemin, t_allpaths *head, int final);
+unsigned int	get_total(t_lemin *lemin, t_allpaths *head, int final);
 
 /*
 **                     queue
@@ -223,5 +224,8 @@ void	fill_ants(t_lemin *lemin, t_allpaths *paths);
 
 
 unsigned int			get_total2(t_lemin *lemin, t_allpaths *head, int index);
+int						max_stepsek(t_lemin *lemin, t_allpaths *head);
+
+t_allpaths *sort_paths(t_allpaths *container);
 
 #endif

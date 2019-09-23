@@ -6,7 +6,7 @@
 #    By: mjouffro <mjouffro@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/04/08 09:48:30 by yabecret          #+#    #+#              #
-#    Updated: 2019/07/04 12:20:09 by mjouffro         ###   ########.fr        #
+#    Updated: 2019/09/23 16:20:33 by mjouffro         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -49,6 +49,8 @@ SRC_NAME 	=		lemin.c								\
 					sharing_ants.c						\
 					display.c							\
 					solve.c								\
+					steps.c 							\
+					steps2.c 							\
 
 OBJ_NAME = $(SRC_NAME:.c=.o)
 
