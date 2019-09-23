@@ -6,7 +6,7 @@
 /*   By: mjouffro <mjouffro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/04 12:08:13 by mjouffro          #+#    #+#             */
-/*   Updated: 2019/09/23 19:25:36 by mjouffro         ###   ########.fr       */
+/*   Updated: 2019/09/23 19:50:17 by mjouffro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,11 +63,11 @@ int		solve_lemin(t_lemin *lemin, unsigned int move)
 	t_allpaths *tmp;
 	//int			max_len;
 
-	head = final_solution(lemin);
-	//head = lemin->container;
+//	head = final_solution(lemin);
+	head = lemin->container;
 	ft_printf("{yellow}path max len is %d\n{reset}", lemin->path_max_len);
 	tmp = head;
-//	ants_per_path(lemin, tmp, lemin->path_max_len);
+	ants_per_path(lemin, tmp, lemin->path_max_len);
 	move = 1;
 	lemin->ant_state = 1;
 	while (tmp)
@@ -75,7 +75,7 @@ int		solve_lemin(t_lemin *lemin, unsigned int move)
 	//	tmp->nb_ants += lemin->remainder;
 	//	ft_printf("{green}remaindr is :%u\n{reset}", lemin->remainder);
 		ft_printf("{green}tmp len is :%u\n{reset}", tmp->len);
-		//ft_printf("{green}tmp nb ants is :%u\n{reset}", tmp->nb_ants);
+		ft_printf("{green}tmp nb ants is :%u\n{reset}", tmp->nb_ants);
 		tmp = tmp->next;
 	}
 	tmp = head;
