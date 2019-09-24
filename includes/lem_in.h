@@ -168,8 +168,8 @@ void			resetvisited(t_lemin *lemin);
 int				backtrack(t_lemin *lemin);
 int				bfs(t_lemin *lemin);
 int				len_max(t_lemin *lemin, t_allpaths *head);
-unsigned int	nbr_steps(t_lemin *lemin, t_allpaths *head, int final);
-unsigned int	get_total(t_lemin *lemin, t_allpaths *head, int final);
+unsigned int	nbr_steps(t_lemin *lemin, t_allpaths *head);
+unsigned int	get_total(t_lemin *lemin, t_allpaths *head);
 
 /*
 **                     queue

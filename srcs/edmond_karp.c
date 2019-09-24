@@ -6,7 +6,7 @@
 /*   By: mjouffro <mjouffro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/25 16:27:12 by yabecret          #+#    #+#             */
-/*   Updated: 2019/09/24 13:11:32 by mjouffro         ###   ########.fr       */
+/*   Updated: 2019/09/24 17:13:36 by mjouffro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,8 @@ int			backtrack(t_lemin *lemin)
 	{
 		if (tracker == 0)
 		{
-			ft_printf("{yellow} pre-final solution : {reset}\n");
-			print(lemin->container->path);
+			//ft_printf("{yellow} pre-final solution : {reset}\n");
+			//print(lemin->container->path);
 			lemin->container->len = cnt - 1;
 			return (SUCCESS);
 		}
@@ -72,31 +72,45 @@ void		resetvisited(t_lemin *lemin)
 int			ek(t_lemin *lemin)
 {
 	int 		tmp;
-	int			final = 1;
+	t_allpaths	*head;
 
 	tmp = 1;
 	lemin->matrix = memalloc_matrix(lemin->cnt);
 	lemin->weight_matrix = memalloc_matrix(lemin->cnt);
 	lemin->container = memalloc_allpaths();
-	lemin->debut = lemin->container;
+	head = lemin->container;
 	lemin->max_steps = INT_MAX;
 	while (bfs(lemin) != 0 && tmp)
 	{
 		backtrack(lemin);
-		tmp = nbr_steps(lemin, lemin->debut, final);
+		tmp = nbr_steps(lemin, lemin->container);
 		tmp ? lemin->max_steps = tmp : lemin->max_steps;
-		ft_printf("nbr_steps is %d\n", lemin->max_steps);
 		resetvisited(lemin);
 		if (!updatematrix(lemin))
 			break ;
-		final++;
-	//	ft_printf("------------------\n");
-	//	ft_printf("{green} i is %d\n", final);
-	//	ft_printf("------------------\n");
 	}
+	lemin->container = head;
+	while (lemin->container)
+	{
+		if (lemin->container->len == 0)
+		{
+			freelinks(&lemin->container->path);
+			ft_memdel((void**)(lemin->container));
+			lemin->nb_paths--;
+		}
+		lemin->container = lemin->container->next;
+	}
+	lemin->container = head;
 
-	//lemin->container = lemin->debut;
-	//sort_paths(lemin->container);
-	
+		while (lemin->container)
+	{
+		if (lemin->container->len == 0)
+		{
+			ft_printf("the container was not properly deletd biitch\n");
+			lemin->nb_paths--;
+		}
+		lemin->container = lemin->container->next;
+	}
+	lemin->container = head;
 	return (SUCCESS);
 }

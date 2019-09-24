@@ -6,7 +6,7 @@
 /*   By: mjouffro <mjouffro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/23 16:19:27 by mjouffro          #+#    #+#             */
-/*   Updated: 2019/09/24 15:47:39 by mjouffro         ###   ########.fr       */
+/*   Updated: 2019/09/24 16:40:34 by mjouffro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int			len_max(t_lemin *lemin, t_allpaths *head)
 	return (len_max);
 }
 
-unsigned int			get_total(t_lemin *lemin, t_allpaths *head, int final)
+unsigned int			get_total(t_lemin *lemin, t_allpaths *head)
 {
 	unsigned int	total;
 	unsigned int	max_steps;
@@ -42,7 +42,7 @@ unsigned int			get_total(t_lemin *lemin, t_allpaths *head, int final)
 	max_len = len_max(lemin, tmp);
 	total = 0;
 	max_steps = lemin->max_steps;
-	while (tmp && (final < (lemin->nb_paths + 1)))
+	while (tmp)
 	{
 		tmp->max_steps = ((max_len + 1) - tmp->len);
 		total += tmp->max_steps;		
@@ -51,7 +51,7 @@ unsigned int			get_total(t_lemin *lemin, t_allpaths *head, int final)
 	return (total);
 }
 
-unsigned int			nbr_steps(t_lemin *lemin, t_allpaths *head, int final)
+unsigned int			nbr_steps(t_lemin *lemin, t_allpaths *head)
 {
 	unsigned int	max_steps;
 	unsigned int	max = 0;
@@ -63,7 +63,7 @@ unsigned int			nbr_steps(t_lemin *lemin, t_allpaths *head, int final)
 	max_steps = lemin->max_steps;
 	tmp = head;
 	
-	total = get_total(lemin, tmp, final);
+	total = get_total(lemin, tmp);
 	if (tmp->total > lemin->nb_ants)
 		return (0);
 //	lemin->remainder = (lemin->nb_ants - tmp->total) / lemin->nb_paths;

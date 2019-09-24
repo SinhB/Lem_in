@@ -6,7 +6,7 @@
 /*   By: mjouffro <mjouffro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/04 12:08:13 by mjouffro          #+#    #+#             */
-/*   Updated: 2019/09/24 15:45:29 by mjouffro         ###   ########.fr       */
+/*   Updated: 2019/09/24 17:11:26 by mjouffro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ t_allpaths *final_solution(t_lemin *lemin)
 	else if (lemin->max_steps > lemin->max_steps1)
 	{
 		tmp = lemin->container1;
-		ft_printf("tmp is container1{reset}\n");
+		ft_printf("{green}tmp is container1{reset}\n");
 	}
 	return (tmp);
 }
@@ -37,22 +37,25 @@ int		ants_per_path(t_lemin *lemin, t_allpaths *head, int max_len)
 	while (tmp)
 	{
 		lemin->path_max_len = tmp->len;
+		ft_printf("{red}max path len is %d\n{reset}", lemin->path_max_len);
 		tmp = tmp->next;
 	}
 	tmp = head;
 	while (tmp)
 	{
+		ft_printf("----------------------\n");
 		ft_printf("{yellow}max len is %d\n{reset}", max_len);
 		tmp->nb_ants = (max_len + 1) - tmp->len;
 		ft_printf("tmp nb ants is %d\n", tmp->nb_ants);
 		ft_printf("tmp len is %d\n", tmp->len);
 		total += tmp->nb_ants;
-		ft_printf("total is %d\n", total);
 		tmp = tmp->next;
+		ft_printf("----------------------\n");
 	}
 	remainder = (lemin->nb_ants - total) / lemin->nb_paths;
 	ft_printf("{red}lemin nb ants is %d{reset}\n", lemin->nb_ants);
 	ft_printf("{red}remainder is %d{reset}\n", remainder);
+	ft_printf("{red}total is %d\n", total);
 	ft_printf("{red}lemin nb paths is %d{reset}\n", lemin->nb_paths);
 	reste = lemin->nb_ants - (remainder * lemin->nb_paths) - total;
 	ft_printf("{yellow}reste is %d{reset}\n", reste);
@@ -72,13 +75,16 @@ int		solve_lemin(t_lemin *lemin, unsigned int move)
 	t_allpaths *head;
 	t_allpaths *tmp;
 	
-	head = final_solution(lemin);
-//	head = lemin->container;
+//	head = final_solution(lemin);
+	head = lemin->container;
 	ft_printf("{yellow}path max len is %d\n{reset}", lemin->path_max_len);
 	ft_printf("{yellow}---------------------------\n\n{reset}");
+	
 	tmp = head;
+
 	ants_per_path(lemin, tmp, lemin->path_max_len);
 	move = 1;
+	tmp = head;
 	lemin->ant_state = 1;
 	while (tmp)
 	{
@@ -89,13 +95,9 @@ int		solve_lemin(t_lemin *lemin, unsigned int move)
 		tmp = tmp->next;
 	}
 	tmp = head;
-	
-	
-	while (move < lemin->max_steps)
-		move += solve(lemin, head);
-	
-	//while (move)
-	//	move = solve(lemin, path);
+
+	//while (move < lemin->max_steps)
+	//	move += solve(lemin, head);
 	return (1);
 }
 
