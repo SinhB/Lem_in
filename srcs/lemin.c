@@ -6,7 +6,7 @@
 /*   By: mjouffro <mjouffro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/26 17:10:06 by mjouffro          #+#    #+#             */
-/*   Updated: 2019/09/17 19:36:57 by mjouffro         ###   ########.fr       */
+/*   Updated: 2019/09/24 15:45:45 by mjouffro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,6 @@ int				main(void)
 	//printmatrix(lemin.matrix, lemin.cnt);
 ///	ft_printf("%s\n", lemin.map);
 	solve_lemin(&lemin, 1);
-//	freelemin(&lemin);
+	freelemin(&lemin);
 	return (0);
 }

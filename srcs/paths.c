@@ -6,7 +6,7 @@
 /*   By: mjouffro <mjouffro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/26 16:26:52 by mjouffro          #+#    #+#             */
-/*   Updated: 2019/09/23 19:27:44 by mjouffro         ###   ########.fr       */
+/*   Updated: 2019/09/24 13:21:31 by mjouffro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,12 +113,6 @@ t_allpaths *sort_paths(t_allpaths *container)
 		}
 	}
 	container = head;
-	while (container)
-	{
-		ft_printf("---path len is %d\n", container->len);
-		container = container->next;
-	}
-	container = head;
 	return (container);
 }
 
@@ -129,7 +123,8 @@ void		get_final_paths(t_lemin *lemin)
 	t_allpaths	*head;
 	int 		length;
 	int			i;
-	
+//	int			nb_steps;
+
 	lemin->nb_paths = find_nb_paths(lemin);
 	tmp = memalloc_links();
 	lemin->container1 = memalloc_allpaths();
@@ -143,6 +138,10 @@ void		get_final_paths(t_lemin *lemin)
 		if (length == lemin->cnt)
 			ft_printf("length == lemin->cnt!\n");
 		lemin->container1->len = length;
+		//ft_printf("{yellow} final solution : {reset}\n");
+		//print(lemin->container1->path);
+		//ft_printf("path len is : %d\n", lemin->container1->len);
+//		printmatrix(lemin->matrix, lemin->cnt);
 		if (i != lemin->nb_paths - 1)
 		{
 			tmp2 = memalloc_allpaths();
@@ -151,10 +150,36 @@ void		get_final_paths(t_lemin *lemin)
 		}
 		i++;
 	}
+	lemin->container1 = head;
+	ft_printf("{red} BEFORE SORT : {reset}\n");
+	while (lemin->container1)
+	{
+//		ft_printf("{yellow} final solution : {reset}\n");
+	//	ft_printf("the paths is : \n\n\n");
+	//	print(lemin->container1->path);
+	//	printall(lemin->container1->path);
+		ft_printf("path len is : %d\n", lemin->container1->len);
+		lemin->container1 = lemin->container1->next;
+	}
+	lemin->container1 = head;
+	ft_printf("{red} AFTER SORT : {reset}\n");
 	lemin->container1 = sort_paths(lemin->container1);
+	head = lemin->container1;
+	while (lemin->container1)
+	{
+	//	ft_printf("{yellow} final solution : {reset}\n");
+		//ft_printf("the paths is : \n\n\n");
+		//print(lemin->container1->path);
+		//printall(lemin->container1->path);
+		ft_printf("path len is : %d\n", lemin->container1->len);
+		lemin->container1 = lemin->container1->next;
+	}
 	lemin->container1 = head;
 	max_stepsek(lemin, head);
-	ft_printf("{yellow} max_steps : %d\n", lemin->max_steps);
-	ft_printf("{yellow} max_steps1 : %d\n", lemin->max_steps1);
+	ft_printf("max_steps : %d\n", lemin->max_steps);
+	ft_printf("max_steps1 : %d\n", lemin->max_steps1);
 	ft_printf("nb paths is %d\n", lemin->nb_paths);
+	//	nb_steps = nbr_steps(lemin, head);
+	//	ft_printf("FINAL nbr_steps is %d\n", nb_steps);
 }
+
