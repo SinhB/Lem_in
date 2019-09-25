@@ -6,7 +6,7 @@
 /*   By: mjouffro <mjouffro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/20 10:58:18 by yabecret          #+#    #+#             */
-/*   Updated: 2019/07/05 18:09:52 by mjouffro         ###   ########.fr       */
+/*   Updated: 2019/09/25 17:47:10 by mjouffro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ int		find_no_end_list(t_lemin *lemin)
 	return (SUCCESS);
 }
 
+
 int		updatematrix(t_lemin *lemin)
 {
 	t_links *head;
@@ -51,27 +52,6 @@ int		updatematrix(t_lemin *lemin)
 		{
 			children = head->next;
 			addflow(lemin->matrix, head->room->index, children->room->index);
-		}
-		head = head->next;
-	}
-	return (SUCCESS);
-}
-
-int		updateweightmatrix(t_lemin *lemin)
-{
-	t_links *head;
-	t_links *children;
-	int		i;
-
-	head = lemin->container->path;
-	i = 1;
-	while (head)
-	{
-		if (head->next)
-		{
-			children = head->next;
-			lemin->weight_matrix[head->room->index][children->room->index] += i;
-			i++;
 		}
 		head = head->next;
 	}
@@ -102,5 +82,3 @@ int		updatefinalmatrices(t_lemin *lemin)
 	}
 	return (SUCCESS);
 }
-
-

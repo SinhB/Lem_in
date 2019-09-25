@@ -6,7 +6,7 @@
 /*   By: mjouffro <mjouffro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/25 16:27:12 by yabecret          #+#    #+#             */
-/*   Updated: 2019/09/24 17:13:36 by mjouffro         ###   ########.fr       */
+/*   Updated: 2019/09/25 17:52:13 by mjouffro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,13 +39,14 @@ int			backtrack(t_lemin *lemin)
 	unsigned int	cnt;
 
 	tracker = lemin->hashend;
+	//tracker = lemin->hashstart;
 	cnt = 0;
 	while (1)
 	{
 		if (tracker == 0)
 		{
-			//ft_printf("{yellow} pre-final solution : {reset}\n");
-			//print(lemin->container->path);
+			ft_printf("{yellow} pre-final solution : {reset}\n");
+			print(lemin->container->path);
 			lemin->container->len = cnt - 1;
 			return (SUCCESS);
 		}
@@ -69,48 +70,48 @@ void		resetvisited(t_lemin *lemin)
 	}
 }
 
+void		delete_extra_node(t_allpaths *head)
+{
+	t_allpaths	*nodebeforedel;
+	t_allpaths	*del;
+
+
+	del = head;
+	nodebeforedel =  head;
+	while (del->next != NULL)
+	{
+		nodebeforedel = del;
+		del = del->next;
+	}
+	if (del->len == 0)
+	{
+		nodebeforedel->next = NULL;
+		freelinks(&del->path);
+		ft_memdel((void**)del);
+	}
+}
+
 int			ek(t_lemin *lemin)
 {
 	int 		tmp;
-	t_allpaths	*head;
 
 	tmp = 1;
 	lemin->matrix = memalloc_matrix(lemin->cnt);
 	lemin->weight_matrix = memalloc_matrix(lemin->cnt);
 	lemin->container = memalloc_allpaths();
-	head = lemin->container;
+	ft_printf("lemin->container->len = %d\n", lemin->container->len);
+	lemin->debut = lemin->container;
 	lemin->max_steps = INT_MAX;
 	while (bfs(lemin) != 0 && tmp)
 	{
 		backtrack(lemin);
-		tmp = nbr_steps(lemin, lemin->container);
+		tmp = nbr_steps(lemin, lemin->debut);
 		tmp ? lemin->max_steps = tmp : lemin->max_steps;
 		resetvisited(lemin);
 		if (!updatematrix(lemin))
 			break ;
 	}
-	lemin->container = head;
-	while (lemin->container)
-	{
-		if (lemin->container->len == 0)
-		{
-			freelinks(&lemin->container->path);
-			ft_memdel((void**)(lemin->container));
-			lemin->nb_paths--;
-		}
-		lemin->container = lemin->container->next;
-	}
-	lemin->container = head;
-
-		while (lemin->container)
-	{
-		if (lemin->container->len == 0)
-		{
-			ft_printf("the container was not properly deletd biitch\n");
-			lemin->nb_paths--;
-		}
-		lemin->container = lemin->container->next;
-	}
-	lemin->container = head;
+	lemin->container = lemin->debut;
+	delete_extra_node(lemin->container);
 	return (SUCCESS);
 }

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   steps.c                                            :+:      :+:    :+:   */
+/*   steps_bfs.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mjouffro <mjouffro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/23 16:19:27 by mjouffro          #+#    #+#             */
-/*   Updated: 2019/09/24 16:40:34 by mjouffro         ###   ########.fr       */
+/*   Updated: 2019/09/25 18:00:20 by mjouffro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,8 @@ int			len_max(t_lemin *lemin, t_allpaths *head)
 	while (tmp)
 	{
 		len_max = len_max < tmp->len ? tmp->len : len_max;
-		tmp = tmp->next;
 		cnt++;
+		tmp = tmp->next;
 	}
 	lemin->nb_paths = cnt;
 	return (len_max);
@@ -64,15 +64,12 @@ unsigned int			nbr_steps(t_lemin *lemin, t_allpaths *head)
 	tmp = head;
 	
 	total = get_total(lemin, tmp);
-	if (tmp->total > lemin->nb_ants)
+	if (total > lemin->nb_ants)
 		return (0);
-//	lemin->remainder = (lemin->nb_ants - tmp->total) / lemin->nb_paths;
-//	reste = lemin->nb_ants - (lemin->remainder * lemin->nb_paths + total);
-	remainder = (lemin->nb_ants - tmp->total) / lemin->nb_paths;
+	remainder = (lemin->nb_ants - total) / lemin->nb_paths;
 	reste = lemin->nb_ants - (remainder * lemin->nb_paths + total);
 	while (tmp)
 	{
-		//tmp->max_steps += (lemin->remainder + tmp->len + (reste ? 1 : 0) - 1);
 		tmp->max_steps += (remainder + tmp->len + (reste ? 1 : 0) - 1);
 		if (max < tmp->max_steps)
 			max = tmp->max_steps;

@@ -6,7 +6,7 @@
 /*   By: mjouffro <mjouffro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/10 19:21:52 by yabecret          #+#    #+#             */
-/*   Updated: 2019/09/23 16:19:10 by mjouffro         ###   ########.fr       */
+/*   Updated: 2019/09/25 17:17:17 by mjouffro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,10 +29,6 @@ int			bfs(t_lemin *lemin)
 	queue->room->visited = true;
 	while (queue != NULL)
 	{
-		// compare weights
-		// add weight + 1 to next room
-//		ft_printf("{red}QUEUE:{reset}\n");
-//		print(queue);
 		enqueue_adjacent(lemin, &queue, queue->room); //add all adjacent into the queue
 		todelete = queue;
 		queue = queue->next;
@@ -41,12 +37,21 @@ int			bfs(t_lemin *lemin)
 			cnt++;
 		free(todelete); //remove first node from the queue
 	}
-	//ft_printf("{red}QUEUE EMPTY{reset}\n");
-	//printall(lemin->list);
 	if (lemin->container && lemin->container->len != 0)
 	{
 		lemin->container->next = memalloc_allpaths();
 		lemin->container = lemin->container->next;
 	}
+//	ft_printf("address is {green}%p\n{reset}", lemin->container);
+	//ft_printf("address is {green}%p\n{reset}", &lemin->container);
+
+
+/*	if (lemin->container && lemin->container->len == 0)
+	{
+		ft_printf("yoooooooo\n");
+		//freelinks(&lemin->container->path);
+		//ft_memdel((void**)(lemin->container));
+	}
+*/
 	return (cnt);
 }

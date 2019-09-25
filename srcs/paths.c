@@ -6,7 +6,7 @@
 /*   By: mjouffro <mjouffro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/26 16:26:52 by mjouffro          #+#    #+#             */
-/*   Updated: 2019/09/24 13:21:31 by mjouffro         ###   ########.fr       */
+/*   Updated: 2019/09/25 16:56:28 by mjouffro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -151,6 +151,8 @@ void		get_final_paths(t_lemin *lemin)
 		i++;
 	}
 	lemin->container1 = head;
+
+
 	ft_printf("{red} BEFORE SORT : {reset}\n");
 	while (lemin->container1)
 	{
@@ -175,6 +177,8 @@ void		get_final_paths(t_lemin *lemin)
 		lemin->container1 = lemin->container1->next;
 	}
 	lemin->container1 = head;
+
+	
 	max_stepsek(lemin, head);
 	ft_printf("max_steps : %d\n", lemin->max_steps);
 	ft_printf("max_steps1 : %d\n", lemin->max_steps1);

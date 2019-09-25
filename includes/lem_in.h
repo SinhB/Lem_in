@@ -228,4 +228,7 @@ int						max_stepsek(t_lemin *lemin, t_allpaths *head);
 
 t_allpaths *sort_paths(t_allpaths *container);
 
+
+void		delete_extra_node(t_allpaths *head);
+
 #endif
