@@ -47,8 +47,8 @@ typedef	struct 			s_allpaths
 	struct s_allpaths	*next;
 	unsigned int		len;
 	unsigned int		nb_ants;
-	unsigned int		total;
 	unsigned int		max_steps;
+
 }						t_allpaths;
 
 typedef	struct			s_lemin
@@ -57,14 +57,20 @@ typedef	struct			s_lemin
 	unsigned int		ant_state;
 	unsigned int		max_steps;
 	unsigned int		max_steps1;
+
+	unsigned int		total;
+	unsigned int		reste;
 	unsigned int		remainder;
+
 	unsigned int		path_max_len;
 	int					state;
 	char                *start;
 	char				*end;
 	char				*map;
 	int					cnt;
-	int					nb_paths;
+	unsigned int		nb_pathsbfs;
+	unsigned int		nb_pathsek;
+	unsigned int		nb_paths;
 	unsigned long		hashstart;
 	unsigned long		hashend;
 	int					**matrix;
@@ -168,7 +174,7 @@ void			resetvisited(t_lemin *lemin);
 int				backtrack(t_lemin *lemin);
 int				bfs(t_lemin *lemin);
 int				len_max(t_lemin *lemin, t_allpaths *head);
-unsigned int	nbr_steps(t_lemin *lemin, t_allpaths *head);
+unsigned int	nbr_steps(t_lemin *lemin, t_allpaths *head, unsigned int max);
 unsigned int	get_total(t_lemin *lemin, t_allpaths *head);
 
 /*
@@ -218,7 +224,7 @@ int		display_ants(t_allpaths	*paths, int left);
 */
 
 int		solve_lemin(t_lemin *lemin, unsigned int move);
-int		solve(t_lemin *lemin, t_allpaths *path);
+int		move_and_display(t_lemin *lemin, t_allpaths *path);
 void	move_ants(t_lemin *lemin, t_allpaths *paths);
 void	fill_ants(t_lemin *lemin, t_allpaths *paths);
 
@@ -229,6 +235,9 @@ int						max_stepsek(t_lemin *lemin, t_allpaths *head);
 t_allpaths *sort_paths(t_allpaths *container);
 
 
-void		delete_extra_node(t_allpaths *head);
+void		delete_extra_node(t_lemin *lemin, t_allpaths *head);
+
+int			exit_with_message_room(char *line);
+int		exit_with_message_links(char *line);
 
 #endif

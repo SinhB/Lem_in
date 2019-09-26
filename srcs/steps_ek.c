@@ -6,7 +6,7 @@
 /*   By: mjouffro <mjouffro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/23 16:20:06 by mjouffro          #+#    #+#             */
-/*   Updated: 2019/09/24 16:46:56 by mjouffro         ###   ########.fr       */
+/*   Updated: 2019/09/26 16:34:51 by mjouffro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int			len_max2(t_lemin *lemin, t_allpaths *head, int index)
 		tmp = tmp->next;
 		i++;
 	}
-	lemin->nb_paths = cnt;
+	lemin->nb_pathsek = cnt;
 	return (len_max);
 }
 
@@ -55,10 +55,10 @@ unsigned int			get_total2(t_lemin *lemin, t_allpaths *head, int index)
 	return (total);
 }
 
-unsigned int			nbr_steps2(t_lemin *lemin, t_allpaths *head, int index)
+unsigned int			nbr_steps2(t_lemin *lemin, t_allpaths *head, int index, unsigned int max)
 {
 	unsigned int	max_steps;
-	unsigned int	max = 0;
+	//unsigned int	max = 0;
 	unsigned int	total;
 	unsigned int	remainder;
 	unsigned int	reste;
@@ -70,8 +70,8 @@ unsigned int			nbr_steps2(t_lemin *lemin, t_allpaths *head, int index)
 	total = get_total2(lemin, tmp, index);
 	if (total > lemin->nb_ants)
 		return (0);
-	remainder = (lemin->nb_ants - total) / lemin->nb_paths;
-	reste = lemin->nb_ants - (remainder * lemin->nb_paths + total);
+	remainder = (lemin->nb_ants - total) / lemin->nb_pathsek;
+	reste = lemin->nb_ants - (remainder * lemin->nb_pathsek + total);
 	while (i < index)
 	{
 		tmp->max_steps += (remainder + tmp->len + (reste ? 1 : 0) - 1);
@@ -91,15 +91,15 @@ unsigned int			nbr_steps2(t_lemin *lemin, t_allpaths *head, int index)
 
 int			max_stepsek(t_lemin *lemin, t_allpaths *head)
 {
-	int			nb_paths;
-	int			tmp = 1;
-	int			max = lemin->nb_paths;
-
+	int				nb_paths;
+	int				tmp = 1;
+	int				max_paths = lemin->nb_pathsek;
+	unsigned int	max;
 	nb_paths = 1;
 	lemin->max_steps1 = INT_MAX;
-	while (nb_paths < (max + 1))
+	while (nb_paths < (max_paths + 1))
 	{
-		if ((tmp = nbr_steps2(lemin, head, nb_paths)) == 0)
+		if ((tmp = nbr_steps2(lemin, head, nb_paths, max = 0)) == 0)
 			return (0);
 		else
 			lemin->max_steps1 = tmp;

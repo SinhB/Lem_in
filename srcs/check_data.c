@@ -6,7 +6,7 @@
 /*   By: mjouffro <mjouffro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/26 17:10:25 by mjouffro          #+#    #+#             */
-/*   Updated: 2019/09/10 15:39:41 by mjouffro         ###   ########.fr       */
+/*   Updated: 2019/09/26 11:48:45 by mjouffro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,26 @@ int		is_command(char *line)
 	if (is_comment(line) && line[1] == '#')
 		return (SUCCESS);
 	return (FAILURE);
+}
+
+int		is_start(t_lemin *lemin)
+{
+	if (lemin->state & S_START)
+	{
+		lemin->state &= ~S_START;
+		return (1);
+	}
+	return (0);
+}
+
+int		is_end(t_lemin *lemin)
+{
+	if (lemin->state & S_END)
+	{
+		lemin->state &= ~S_END;
+		return (1);
+	}
+	return (0);
 }
 
 int		is_hash_existing(t_links *tmp, unsigned long hash)

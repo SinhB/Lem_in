@@ -6,7 +6,7 @@
 /*   By: mjouffro <mjouffro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/25 16:27:12 by yabecret          #+#    #+#             */
-/*   Updated: 2019/09/25 17:52:13 by mjouffro         ###   ########.fr       */
+/*   Updated: 2019/09/26 16:32:58 by mjouffro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,14 +39,13 @@ int			backtrack(t_lemin *lemin)
 	unsigned int	cnt;
 
 	tracker = lemin->hashend;
-	//tracker = lemin->hashstart;
 	cnt = 0;
 	while (1)
 	{
 		if (tracker == 0)
 		{
-			ft_printf("{yellow} pre-final solution : {reset}\n");
-			print(lemin->container->path);
+			//ft_printf("{yellow} pre-final solution : {reset}\n");
+			//print(lemin->container->path);
 			lemin->container->len = cnt - 1;
 			return (SUCCESS);
 		}
@@ -70,7 +69,7 @@ void		resetvisited(t_lemin *lemin)
 	}
 }
 
-void		delete_extra_node(t_allpaths *head)
+void		delete_extra_node(t_lemin *lemin, t_allpaths *head)
 {
 	t_allpaths	*nodebeforedel;
 	t_allpaths	*del;
@@ -86,6 +85,9 @@ void		delete_extra_node(t_allpaths *head)
 	if (del->len == 0)
 	{
 		nodebeforedel->next = NULL;
+		ft_printf("{yellow}---lemin nb paths is %d---\n{reset}", lemin->nb_pathsbfs);
+		lemin->nb_pathsbfs--;
+		ft_printf("{green}---now lemin nb paths is %d---\n{reset}", lemin->nb_pathsbfs);
 		freelinks(&del->path);
 		ft_memdel((void**)del);
 	}
@@ -93,25 +95,25 @@ void		delete_extra_node(t_allpaths *head)
 
 int			ek(t_lemin *lemin)
 {
-	int 		tmp;
+	int				tmp;
+	unsigned int	max;
 
 	tmp = 1;
 	lemin->matrix = memalloc_matrix(lemin->cnt);
 	lemin->weight_matrix = memalloc_matrix(lemin->cnt);
 	lemin->container = memalloc_allpaths();
-	ft_printf("lemin->container->len = %d\n", lemin->container->len);
 	lemin->debut = lemin->container;
 	lemin->max_steps = INT_MAX;
 	while (bfs(lemin) != 0 && tmp)
 	{
 		backtrack(lemin);
-		tmp = nbr_steps(lemin, lemin->debut);
+		tmp = nbr_steps(lemin, lemin->debut, max = 0);
 		tmp ? lemin->max_steps = tmp : lemin->max_steps;
 		resetvisited(lemin);
 		if (!updatematrix(lemin))
 			break ;
 	}
 	lemin->container = lemin->debut;
-	delete_extra_node(lemin->container);
+	delete_extra_node(lemin, lemin->container);
 	return (SUCCESS);
 }

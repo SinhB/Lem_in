@@ -6,13 +6,13 @@
 /*   By: mjouffro <mjouffro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/26 17:09:53 by mjouffro          #+#    #+#             */
-/*   Updated: 2019/07/04 17:27:23 by yabecret         ###   ########.fr       */
+/*   Updated: 2019/09/26 11:49:37 by mjouffro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
 
-t_graph		*memalloc_graph(void)
+t_graph			*memalloc_graph(void)
 {
 	t_graph *room;
 
@@ -21,7 +21,7 @@ t_graph		*memalloc_graph(void)
 	return (room);
 }
 
-t_links		*memalloc_links(void)
+t_links			*memalloc_links(void)
 {
 	t_links	*elem;
 

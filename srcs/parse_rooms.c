@@ -5,7 +5,6 @@ int		is_room(char *line)
 	int i;
 
 	i = 0;
-
 	while (line[i] != '\0')
 	{
 		if (line[0] == ' ' || line[0] == 'L' || line[0] == '#')
@@ -41,6 +40,22 @@ char	*get_name(char *line)
 	return (ft_strdup(line));
 }
 
+void	room_start_or_end(t_lemin *lemin, t_links *links)
+{
+	if (is_start(lemin))
+	{
+		lemin->start = links->room->name;
+		lemin->hashstart = links->room->hash;
+		lemin->head = links->room;
+	}
+	else if (is_end(lemin))
+	{
+		lemin->end = links->room->name;
+		lemin->hashend = links->room->hash;
+		lemin->sink = links->room;
+	}
+}
+
 int		get_room(t_lemin *lemin, t_links **tmp, char *line)
 {
 	t_links			*links;
@@ -62,7 +77,8 @@ int		get_room(t_lemin *lemin, t_links **tmp, char *line)
 	links->room->hash = hash;
 	links->room->visited = false;
 	links->room->index = lemin->cnt++;
-	if (is_start(lemin))
+	room_start_or_end(lemin, links);
+/*	if (is_start(lemin))
 	{
 		lemin->start = links->room->name;
 		lemin->hashstart = links->room->hash;
@@ -74,6 +90,7 @@ int		get_room(t_lemin *lemin, t_links **tmp, char *line)
 		lemin->hashend = links->room->hash;
 		lemin->sink = links->room;
 	}
+*/
 	addlinks(tmp, links);
 	add_line_to_str(lemin, line);
 	free(linetmp);

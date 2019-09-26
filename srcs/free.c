@@ -6,7 +6,7 @@
 /*   By: mjouffro <mjouffro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/14 15:40:11 by yabecret          #+#    #+#             */
-/*   Updated: 2019/09/25 17:18:38 by mjouffro         ###   ########.fr       */
+/*   Updated: 2019/09/26 12:03:51 by mjouffro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int 		freeallpaths(t_allpaths **allpaths)
 	return (SUCCESS);
 }
 
-void freelemin(t_lemin *lemin)
+void 		freelemin(t_lemin *lemin)
 {
 	if (lemin->start)
 		ft_strdel(&lemin->start);

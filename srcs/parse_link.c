@@ -6,13 +6,13 @@
 /*   By: mjouffro <mjouffro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/05 12:28:54 by yabecret          #+#    #+#             */
-/*   Updated: 2019/09/10 15:38:29 by mjouffro         ###   ########.fr       */
+/*   Updated: 2019/09/26 12:04:07 by mjouffro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
 
-void addhash_links(t_links **list, t_links *l1, t_links *l2, unsigned long *h)
+void 	addhash_links(t_links **list, t_links *l1, t_links *l2, unsigned long *h)
 {
 	t_links	*tmp;
 	int		state;
@@ -39,7 +39,7 @@ void addhash_links(t_links **list, t_links *l1, t_links *l2, unsigned long *h)
 	}
 }
 
-int get_link(t_lemin *lemin, t_links **tmp, char *line)
+int 	get_link(t_lemin *lemin, t_links **tmp, char *line)
 {
 	t_links			*l1;
 	t_links			*l2;
@@ -50,9 +50,10 @@ int get_link(t_lemin *lemin, t_links **tmp, char *line)
 	h[0] = hashing((unsigned char*)rooms[0]);
 	h[1] = hashing((unsigned char*)rooms[1]);
 	if (!(are_hash_valid(*tmp, h)))
-	{	//return (FAILURE);
-			ft_printf("1 :%s\n", rooms[0]);
-			ft_printf("2 :%s\n", rooms[1]);
+	{	
+		ft_printf("1 :%s\n", rooms[0]);
+		ft_printf("2 :%s\n", rooms[1]);
+		return (FAILURE);
 	}
 	l1 = memalloc_links();
 	l2 = memalloc_links();

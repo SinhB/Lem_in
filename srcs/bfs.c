@@ -6,7 +6,7 @@
 /*   By: mjouffro <mjouffro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/10 19:21:52 by yabecret          #+#    #+#             */
-/*   Updated: 2019/09/25 17:17:17 by mjouffro         ###   ########.fr       */
+/*   Updated: 2019/09/26 11:46:32 by mjouffro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,12 +24,11 @@ int			bfs(t_lemin *lemin)
 	todelete = NULL;
 	new = memalloc_links();
 	new->room = lemin->head;
-	//new->room = lemin->sink;
 	enqueue(&queue, new);
 	queue->room->visited = true;
 	while (queue != NULL)
 	{
-		enqueue_adjacent(lemin, &queue, queue->room); //add all adjacent into the queue
+		enqueue_adjacent(lemin, &queue, queue->room);
 		todelete = queue;
 		queue = queue->next;
 		//print(queue);
@@ -42,16 +41,5 @@ int			bfs(t_lemin *lemin)
 		lemin->container->next = memalloc_allpaths();
 		lemin->container = lemin->container->next;
 	}
-//	ft_printf("address is {green}%p\n{reset}", lemin->container);
-	//ft_printf("address is {green}%p\n{reset}", &lemin->container);
-
-
-/*	if (lemin->container && lemin->container->len == 0)
-	{
-		ft_printf("yoooooooo\n");
-		//freelinks(&lemin->container->path);
-		//ft_memdel((void**)(lemin->container));
-	}
-*/
 	return (cnt);
 }

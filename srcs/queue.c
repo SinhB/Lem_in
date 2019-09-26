@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   queue.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yabecret <yabecret@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mjouffro <mjouffro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/09 01:06:18 by yabecret          #+#    #+#             */
-/*   Updated: 2019/07/05 21:23:00 by yabecret         ###   ########.fr       */
+/*   Updated: 2019/09/26 11:47:26 by mjouffro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,6 @@ void	update_info_enqueue(t_links **queue, t_links *list, t_graph *room)
 	tmp = NULL;
 	name = room->name;
 	pred = room->hash;
-	//ft_printf("{violet}queue back name : %s{reset}\n", list->room->name);
 	list->room->visited = true;
 	list->room->pred = pred;
 	list->room->parent = name;

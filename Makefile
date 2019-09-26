@@ -6,7 +6,7 @@
 #    By: mjouffro <mjouffro@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/04/08 09:48:30 by yabecret          #+#    #+#              #
-#    Updated: 2019/09/24 16:43:56 by mjouffro         ###   ########.fr        #
+#    Updated: 2019/09/26 13:05:21 by mjouffro         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,7 +37,6 @@ SRC_NAME 	=		lemin.c								\
 					parsing.c							\
 					utils.c								\
 					check_data.c						\
-					is_data.c							\
 					malloc.c							\
 					free.c								\
 					errors.c							\
@@ -46,11 +45,12 @@ SRC_NAME 	=		lemin.c								\
 					matrix.c							\
 					edmond_karp.c						\
 					paths.c								\
-					sharing_ants.c						\
-					display.c							\
 					solve.c								\
 					steps_bfs.c 						\
 					steps_ek.c 							\
+					sort_container.c					\
+					move_display.c						\
+					display_utils.c						\
 
 OBJ_NAME = $(SRC_NAME:.c=.o)
 

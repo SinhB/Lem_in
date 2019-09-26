@@ -15,6 +15,12 @@ int		gnl_exit(char *line)
 	return (0);
 }
 
+/*void	add_line_and_delete(t_lemin *lemin, char *line)
+{
+	add_line_to_str(lemin, line);
+	ft_strdel(&line);
+}*/
+
 int		parsing(t_lemin *lemin)
 {
 	char		*line;
@@ -27,40 +33,28 @@ int		parsing(t_lemin *lemin)
 			lemin->state |= start_end(line);
 			add_line_to_str(lemin, line);
 			ft_strdel(&line);
+			//add_line_and_delete(lemin, line);
 		}
 		else if (is_comment(line))
 		{
 			add_line_to_str(lemin, line);
 			ft_strdel(&line);
+			//add_line_and_delete(lemin, line);
 		}
 		else if (ft_str_is_digit(line) && !lemin->nb_ants)
-		{
 			lemin->nb_ants = ft_atoi(line);
-			ft_printf("nb ants is %d\n", lemin->nb_ants);
-		}
 		else if (ft_strchr(line, '-') && (lemin->state & S_ROOMS))
 		{
 			if (rooms_errors(lemin) && !(lemin->state & S_LINKS))
-			{
-				ft_printf("rooms error\n");
-				return (gnl_exit(line));
-			}
+				exit_with_message_room(line);
 			if (!get_link(lemin, &lemin->list, line))
-			{
-				ft_printf("linkss error\n");
-				return (gnl_exit(line));
-			}
-			//ft_printf("got links \n");
+				exit_with_message_links(line);
 		}
 		else if (!(lemin->state & S_LINKS) && is_room(line) 
 			&& (lemin->nb_ants))
 		{
 			if (!get_room(lemin, &lemin->list, line))
-			{
-				ft_printf("did not get room\n");
-				return (gnl_exit(line));
-			}
-			//ft_printf("got rooms\n");
+				exit_with_message_room(line);
 		}
 		/*else
 		{
@@ -72,8 +66,3 @@ int		parsing(t_lemin *lemin)
 	return (1);
 }
 
-// declare 2 t_links => the temporary queue of the rooms
-// 			         => the new element you want to add
-// malloc the new element -> new_elem->room = malloc_graph
-// set(&(elem->room),line) the  name for new elem -> name
-// add this element to the temporary queue of the rooms
