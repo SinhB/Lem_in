@@ -6,7 +6,7 @@
 /*   By: mjouffro <mjouffro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/26 16:26:52 by mjouffro          #+#    #+#             */
-/*   Updated: 2019/09/26 16:29:10 by mjouffro         ###   ########.fr       */
+/*   Updated: 2019/10/03 17:10:34 by mjouffro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,7 @@ void		get_final_paths(t_lemin *lemin)
 	unsigned int	i;
 
 	lemin->nb_pathsek = find_nb_paths(lemin);
+	ft_printf("nb paths ek is %d\n", lemin->nb_pathsek);	
 	tmp = memalloc_links();
 	lemin->container1 = memalloc_allpaths();
 	head = lemin->container1;
@@ -132,8 +133,9 @@ void		get_final_paths(t_lemin *lemin)
 		lemin->container1 = lemin->container1->next;
 	}
 	lemin->container1 = head;
-
 	
+	ft_printf("\nat this point container 1 is sort and has all the paths\nbut not all necessary paths\n\n");
+
 	max_stepsek(lemin, head);
 	ft_printf("max_steps : %d\n", lemin->max_steps);
 	ft_printf("max_steps1 : %d\n", lemin->max_steps1);

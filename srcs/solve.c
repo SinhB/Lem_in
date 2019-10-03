@@ -6,7 +6,7 @@
 /*   By: mjouffro <mjouffro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/04 12:08:13 by mjouffro          #+#    #+#             */
-/*   Updated: 2019/09/26 16:35:55 by mjouffro         ###   ########.fr       */
+/*   Updated: 2019/10/03 16:53:12 by mjouffro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,16 +20,21 @@ t_allpaths *final_solution(t_lemin *lemin)
 	{
 		tmp = lemin->container;
 		lemin->nb_paths = lemin->nb_pathsbfs;
+		ft_printf("{green}tmp is container{reset}\n");
 	}
 	else if (lemin->max_steps > lemin->max_steps1)
 	{
 		tmp = lemin->container1;
 		lemin->nb_paths = lemin->nb_pathsek;
+		lemin->max_steps = lemin->max_steps1;
 		ft_printf("{green}tmp is container1{reset}\n");
 	}
 	ft_printf("========== nbpaths is : %u", lemin->nb_paths);
 	return (tmp);
 }
+
+// il faut boucler sur tmp
+// cpdt ds container : il y a un chemin en trop (mal deleted)
 
 int		ants_per_path(t_lemin *lemin, t_allpaths *head)
 {
@@ -39,14 +44,18 @@ int		ants_per_path(t_lemin *lemin, t_allpaths *head)
 	int				reste;
 	
 	tmp = head;
-	while (tmp->next != NULL)
+
+/*	while (tmp)
+	//while (tmp->next != NULL)
 	{
 		lemin->path_max_len = tmp->len;
 		ft_printf("{red}max path len is %d\n{reset}", tmp->len);
 		tmp = tmp->next;
 	}
-	tmp = head;
-	while (tmp->next != NULL)
+	tmp = head;*/
+	
+	while (tmp)
+	//while (tmp->next != NULL)
 	{
 		ft_printf("----------------------\n");
 		ft_printf("{yellow}max len is %d\n{reset}", lemin->path_max_len);
@@ -67,10 +76,13 @@ int		ants_per_path(t_lemin *lemin, t_allpaths *head)
 	reste = lemin->nb_ants - (remainder * lemin->nb_paths) - total;
 	ft_printf("{yellow}reste is %d{reset}\n", reste);
 	tmp = head;
-	while (tmp->next != NULL)
+//	while (tmp->next != NULL)
+	while (tmp)
 	{
 		tmp->nb_ants += remainder;
+		ft_printf("tmp nb ants is %d\n", tmp->nb_ants);
 		tmp->nb_ants += reste ? 1 : 0;
+		ft_printf("tmp nb ants is %d\n", tmp->nb_ants);
 		reste > 0 ? reste-- : 0;
 		tmp = tmp->next;
 	}

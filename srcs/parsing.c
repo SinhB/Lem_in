@@ -42,7 +42,10 @@ int		parsing(t_lemin *lemin)
 			//add_line_and_delete(lemin, line);
 		}
 		else if (ft_str_is_digit(line) && !lemin->nb_ants)
+		{
 			lemin->nb_ants = ft_atoi(line);
+			add_line_to_str(lemin, line);
+		}
 		else if (ft_strchr(line, '-') && (lemin->state & S_ROOMS))
 		{
 			if (rooms_errors(lemin) && !(lemin->state & S_LINKS))

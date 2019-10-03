@@ -6,7 +6,7 @@
 /*   By: mjouffro <mjouffro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/23 16:20:06 by mjouffro          #+#    #+#             */
-/*   Updated: 2019/09/26 16:34:51 by mjouffro         ###   ########.fr       */
+/*   Updated: 2019/10/03 16:52:38 by mjouffro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,9 @@ unsigned int			nbr_steps2(t_lemin *lemin, t_allpaths *head, int index, unsigned 
 		tmp->max_steps += (remainder + tmp->len + (reste ? 1 : 0) - 1);
 		if (max < tmp->max_steps)
 			max = tmp->max_steps;
+
+		// line below useful if delete same in solve	
+		//lemin->path_max_len = tmp->len;
 		tmp = tmp->next;
 		i++;
 		if (reste > 0)
@@ -84,6 +87,7 @@ unsigned int			nbr_steps2(t_lemin *lemin, t_allpaths *head, int index, unsigned 
 	}
 	max_steps = max;
 	if (max_steps > lemin->max_steps1)
+	// maybe add ants at this moment
 		return (0);
 	else
 		return (max_steps);
@@ -95,6 +99,7 @@ int			max_stepsek(t_lemin *lemin, t_allpaths *head)
 	int				tmp = 1;
 	int				max_paths = lemin->nb_pathsek;
 	unsigned int	max;
+	
 	nb_paths = 1;
 	lemin->max_steps1 = INT_MAX;
 	while (nb_paths < (max_paths + 1))
@@ -107,5 +112,6 @@ int			max_stepsek(t_lemin *lemin, t_allpaths *head)
 		//lemin->path_max_len = head->len;    // beware if container is better than container 1 need to change
 		ft_printf("{red} nb paths is : %d\n{reset}", nb_paths);
 	}
+	ft_printf("max steps ek is %d\n", lemin->max_steps1);
 	return (1);
 }
