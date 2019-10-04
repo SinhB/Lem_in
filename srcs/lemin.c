@@ -6,7 +6,7 @@
 /*   By: mjouffro <mjouffro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/26 17:10:06 by mjouffro          #+#    #+#             */
-/*   Updated: 2019/09/25 17:18:29 by mjouffro         ###   ########.fr       */
+/*   Updated: 2019/10/04 12:13:00 by mjouffro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@ int				main(void)
 		return (FAILURE);
 	}
 	ft_printf("parsing done\n");
+	if (lemin.head == NULL)
+		return (FAILURE);
 	ek(&lemin);
 	updatefinalmatrices(&lemin);
 	get_final_paths(&lemin);

@@ -6,7 +6,7 @@
 /*   By: mjouffro <mjouffro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/23 16:19:27 by mjouffro          #+#    #+#             */
-/*   Updated: 2019/10/03 16:18:08 by mjouffro         ###   ########.fr       */
+/*   Updated: 2019/10/04 12:07:08 by mjouffro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int						len_max(t_lemin *lemin, t_allpaths *head)
 	unsigned int	cnt;
 	t_allpaths		*tmp;
 
-	cnt = 0;
+	cnt = 1;
 	tmp = head;
 	len_max = tmp->len;
 	while (tmp)
