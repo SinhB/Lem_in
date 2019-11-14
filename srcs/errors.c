@@ -6,7 +6,7 @@
 /*   By: mjouffro <mjouffro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/05 15:32:49 by yabecret          #+#    #+#             */
-/*   Updated: 2019/09/26 12:16:40 by mjouffro         ###   ########.fr       */
+/*   Updated: 2019/10/22 13:20:02 by mjouffro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,12 +23,24 @@ int		rooms_errors(t_lemin *lemin)
 
 int		exit_with_message_room(char *line)
 {
-	ft_printf("rooms error\n");
+	ft_printf("{red}ERROR:{reset} room format\n");
+	return (gnl_exit(line));
+}
+
+int		exit_with_message_coord_overflow(char *line)
+{
+	ft_printf("{red}ERROR:{reset} coord overflow\n");
+	return (gnl_exit(line));
+}
+
+int		exit_with_message_room_duplicate(char *line)
+{
+	ft_printf("{red}ERROR:{reset} duplicate room\n");
 	return (gnl_exit(line));
 }
 
 int		exit_with_message_links(char *line)
 {
-	ft_printf("linkss error\n");
+	ft_printf("{red}ERROR:{reset} links format\n");
 	return (gnl_exit(line));
 }

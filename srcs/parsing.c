@@ -1,13 +1,16 @@
-#include "lem_in.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parsing.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mjouffro <mjouffro@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/10/21 20:08:48 by mjouffro          #+#    #+#             */
+/*   Updated: 2019/10/23 10:30:09 by yabecret         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-int		start_end(char *line)
-{
-	if (ft_strcmp("##start", line) == 0)
-		return (S_START);
-	else if (ft_strcmp("##end", line) == 0)
-		return (S_END);
-	return (FAILURE);
-}
+#include "lem_in.h"
 
 int		gnl_exit(char *line)
 {
@@ -15,57 +18,51 @@ int		gnl_exit(char *line)
 	return (0);
 }
 
-/*void	add_line_and_delete(t_lemin *lemin, char *line)
+int		success_exit(char *line)
+{
+	ft_strdel(&line);
+	return (1);
+}
+
+void	add_line_and_delete(t_lemin *lemin, char *line)
 {
 	add_line_to_str(lemin, line);
 	ft_strdel(&line);
-}*/
+}
 
-int		parsing(t_lemin *lemin)
+int		is_data_sufficient(t_lemin *lemin)
 {
-	char		*line;
-
-	line = NULL;
-	while (get_next_line(FD, &line) == 1)
+	if (!(lemin->state & S_LINKS) || !(lemin->state & S_START)
+	|| !(lemin->state & S_END) || !lemin->nb_ants)
 	{
-		if (is_command(line))
-		{
-			lemin->state |= start_end(line);
-			add_line_to_str(lemin, line);
-			ft_strdel(&line);
-			//add_line_and_delete(lemin, line);
-		}
-		else if (is_comment(line))
-		{
-			add_line_to_str(lemin, line);
-			ft_strdel(&line);
-			//add_line_and_delete(lemin, line);
-		}
-		else if (ft_str_is_digit(line) && !lemin->nb_ants)
-		{
-			lemin->nb_ants = ft_atoi(line);
-			add_line_to_str(lemin, line);
-		}
-		else if (ft_strchr(line, '-') && (lemin->state & S_ROOMS))
-		{
-			if (rooms_errors(lemin) && !(lemin->state & S_LINKS))
-				exit_with_message_room(line);
-			if (!get_link(lemin, &lemin->list, line))
-				exit_with_message_links(line);
-		}
-		else if (!(lemin->state & S_LINKS) && is_room(line) 
-			&& (lemin->nb_ants))
-		{
-			if (!get_room(lemin, &lemin->list, line))
-				exit_with_message_room(line);
-		}
-		/*else
-		{
-			ft_printf("did not go in any parsing condition\n");
-			return (gnl_exit(line));
-		}*/
-		ft_strdel(&line);
+		ft_printf("{red}ERROR:{reset} not enough data : ");
+		ft_printf("missing source, sink, links or ants\n");
+		return (0);
 	}
 	return (1);
 }
 
+int		parsing(t_lemin *lemin)
+{
+	char		*line;
+	int			failure;
+
+	line = NULL;
+	failure = 1;
+	while (get_next_line(FD, &line) == 1)
+	{
+		if (failure && is_command(line))
+			add_command_to_state(lemin, line);
+		else if (failure && is_comment(line))
+			add_line_and_delete(lemin, line);
+		else if (failure && ft_str_is_digit(line) && !lemin->nb_ants)
+			(!get_ants(lemin, line)) ? failure = 0 : 0;
+		else if (failure && links_formatting(lemin, line))
+			(!parse_links(lemin, line)) ? failure = 0 : 0;
+		else if (failure && !(lemin->state & S_LINKS) && (lemin->nb_ants))
+			(!parse_room(lemin, line)) ? failure = 0 : 0;
+		else
+			ft_strdel(&line);
+	}
+	return (failure ? is_data_sufficient(lemin) : FAILURE);
+}

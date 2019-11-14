@@ -6,13 +6,13 @@
 /*   By: mjouffro <mjouffro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/26 12:59:58 by mjouffro          #+#    #+#             */
-/*   Updated: 2019/10/03 17:09:13 by mjouffro         ###   ########.fr       */
+/*   Updated: 2019/10/21 20:02:41 by mjouffro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
 
-void	move_ants(t_lemin *lemin, t_allpaths *paths)
+void				move_ants(t_lemin *lemin, t_allpaths *paths)
 {
 	t_links			*tmp;
 	unsigned int	tracker;
@@ -35,9 +35,9 @@ void	move_ants(t_lemin *lemin, t_allpaths *paths)
 	}
 }
 
-void	fill_ants(t_lemin *lemin, t_allpaths *paths)
+void				fill_ants(t_lemin *lemin, t_allpaths *paths)
 {
-	t_links 		*tmp;
+	t_links			*tmp;
 
 	tmp = paths->path;
 	tmp = tmp->next;
@@ -47,13 +47,9 @@ void	fill_ants(t_lemin *lemin, t_allpaths *paths)
 		lemin->ant_state++;
 		paths->nb_ants--;
 	}
-	/*if (paths->nb_ants == 0)
-	{
-		tmp->room->antid = 0;
-	}*/
 }
 
-int		is_empty(t_allpaths *path)
+int					is_empty(t_allpaths *path)
 {
 	t_links			*tmp;
 
@@ -67,11 +63,13 @@ int		is_empty(t_allpaths *path)
 	return (SUCCESS);
 }
 
-int		display_ants(t_allpaths	*paths, int left)
+int					display_ants(t_lemin *lemin, t_allpaths *paths, int left)
 {
-	t_links	*tmp;
+	t_links			*tmp;
 
 	tmp = paths->path;
+	if (lemin->state & S_COLOR)
+		return (display_color_ants(tmp, paths->color_id, left));
 	while (tmp)
 	{
 		if (tmp->room->antid && left == 0)
@@ -86,12 +84,12 @@ int		display_ants(t_allpaths	*paths, int left)
 	return (left);
 }
 
-int		move_and_display(t_lemin *lemin, t_allpaths *path)
+int					move_and_display(t_lemin *lemin, t_allpaths *path)
 {
-	unsigned int 	i;
+	unsigned int	i;
 	int				ret;
-	static int 		left;
-	t_allpaths 		*tmp;
+	static int		left;
+	t_allpaths		*tmp;
 
 	i = 0;
 	left = 0;
@@ -101,10 +99,9 @@ int		move_and_display(t_lemin *lemin, t_allpaths *path)
 	{
 		move_ants(lemin, tmp);
 		fill_ants(lemin, tmp);
-		left = display_ants(tmp, left);
+		left = display_ants(lemin, tmp, left);
 		ret = (is_empty(tmp) == 0) ? 1 : ret;
 		tmp = tmp->next;
-		//ft_printf("left is %d\n", left);
 		i++;
 	}
 	ret == 1 ? ft_printf("\n") : 0;

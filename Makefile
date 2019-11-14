@@ -6,7 +6,7 @@
 #    By: mjouffro <mjouffro@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/04/08 09:48:30 by yabecret          #+#    #+#              #
-#    Updated: 2019/09/26 13:05:21 by mjouffro         ###   ########.fr        #
+#    Updated: 2019/10/23 12:10:51 by yabecret         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,9 +14,9 @@
 NAME	=	lem-in
 
 # Compilation
-CC			=	@cc -g -fsanitize=address
+CC			=	@cc -g #-fsanitize=address
 CFLAGS		=	-O3 -Wall -Wextra -Werror
-CPPFLAGS	=	-Iincludes
+LIBFLAGS	=	-Iincludes
 
 # Files && Objs
 
@@ -31,7 +31,7 @@ LDFLAGS		= -Llibft
 LDLIBS		= -lft
 
 SRC_NAME 	=		lemin.c								\
-					parse_ants.c						\
+					parse_ants_and_commands.c			\
 					parse_rooms.c						\
 					parse_link.c						\
 					parsing.c							\
@@ -50,7 +50,11 @@ SRC_NAME 	=		lemin.c								\
 					steps_ek.c 							\
 					sort_container.c					\
 					move_display.c						\
-					display_utils.c						\
+					hash.c								\
+					options.c							\
+					backward.c							\
+					delete_paths.c						\
+					calculus.c							\
 
 OBJ_NAME = $(SRC_NAME:.c=.o)
 
@@ -97,11 +101,11 @@ $(OBJ_PATH)		:
 
 $(NAME)			:	$(OBJ)
 					@make -C $(LIB)
-					@$(CC) $(CFLAGS) $(CPPFLAGS) -g -o $@ $^ $(LIB)libft.a
+					@$(CC) $(CFLAGS) $(LIBFLAGS) -g -o $@ $^ $(LIB)libft.a
 					@echo "make $(NAME)$(LOG_GREEN) ✓ $(LOG_NOCOLOR)"
 
 $(OBJ_PATH)/%.o:	$(SRC_PATH)/%.c
-					$(CC) $(CFLAGS) $(CPPFLAGS) -c $< -o $@
+					$(CC) $(CFLAGS) $(LIBFLAGS) -c $< -o $@
 
 # Clean rules
 clean			:
