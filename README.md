@@ -28,5 +28,9 @@ Parameters are :<br/>
 <h1>Usage :</h1><br/>
 
 - <pre><code>Make</code></pre><br/>
-- run <pre><code>./lemin < antfarm.file</code></pre><br/>
-- you can use -s and -c option, -s print the number of steps, -c add colors for better visualization<br/>
+- <pre><code>./lemin < antfarm.file</code></pre><br/>
+- you can use <code>-s</code> and <code>-c</code> option, <code>-s</code> print the number of steps, <code>-c</code> add colors for better visualization<br/>
+
+<h1>Example :</h1><br/>
+
+![Screen Shot 2020-02-27 at 11 49 11 AM](https://user-images.githubusercontent.com/24353380/75437882-3dad0f00-5957-11ea-8a30-64a116b3bd65.png)
