@@ -24,3 +24,9 @@ I used an inspired version of Edmond Karp algorithm, with mutiple BFS (Breadth-f
 Parameters are :<br/>
 - The number of ants<br/>
 - The ant farm (including the rooms and the tubes)<br/>
+
+<h1>Usage :</h1><br/>
+
+- <pre><code>Make</code></pre><br/>
+- run <pre><code>./lemin < antfarm.file</code></pre><br/>
+- you can use -s and -c option, -s print the number of steps, -c add colors for better visualization<br/>
