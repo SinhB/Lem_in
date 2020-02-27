@@ -1,7 +1,7 @@
 # Lem_in
 
-The main goal of this project is to find the most optimal way for a X number of ants to travel accros an ant farm, from a start room into and sink room.<br/>
-All the ants have to travel to sink room with the minimum steps possible.
+The main goal of this project is to find the most optimal way for X number of ants to traverse an ant farm, from a start room into and sink room.<br/>
+All the ants have to reach the sink room with the minimum steps possible.
 
 <h1>Ant farm specifications :</h1><br/>
 - Tubes and rooms<br/>
