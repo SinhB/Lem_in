@@ -9,7 +9,10 @@ The main goal of this project is to find the most optimal way for a X number of 
 - A tube joins two rooms to each other<br/>
 - A room can be linked to an infinite number of rooms and by as many tubes as deemed necessary<br/>
 - A room can only contain 1 ant at a time<br/>
+<br/>
 
-Example of ant farm code :<br/>
+Example of ant farm code and his representation:<br/>
 
 ![Screen Shot 2020-02-27 at 11 12 52 AM](https://user-images.githubusercontent.com/24353380/75434812-65e63f00-5952-11ea-8b26-b9493124cddb.png)
+![Screen Shot 2020-02-27 at 11 13 51 AM](https://user-images.githubusercontent.com/24353380/75435165-eefd7600-5952-11ea-8cc1-89c4cd4ed931.png)
+
