@@ -31,7 +31,6 @@ Parameters are :<br/>
 
 <h1>Usage :</h1><br/>
 
-- <pre><code>Make</code></pre><br/>
 - <pre><code>./lemin < antfarm.file</code></pre><br/>
 - you can use <code>-s</code> and <code>-c</code> option, <code>-s</code> print the number of steps, <code>-c</code> add colors for better visualization<br/>
 
