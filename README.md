@@ -25,6 +25,10 @@ Parameters are :<br/>
 - The number of ants<br/>
 - The ant farm (including the rooms and the tubes)<br/>
 
+<h1>Installation :</h1><br/>
+
+<pre><code>git clone https://github.com/SinhB/Lem_in.git & cd Lem_in & make</code></pre><br/>
+
 <h1>Usage :</h1><br/>
 
 - <pre><code>Make</code></pre><br/>
